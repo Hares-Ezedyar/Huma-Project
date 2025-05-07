@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HumaPress - Figma Prototype</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #202225;
+            color: #dcddde;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .server-list {
+            width: 72px;
+            background-color: #202225;
+            padding: 12px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+        }
+        .server-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #36393f;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: border-radius 0.2s;
+        }
+        .server-icon:hover {
+            border-radius: 16px;
+            background-color: #5865f2;
+        }
+        .server-icon.active {
+            border-radius: 16px;
+            background-color: #5865f2;
+        }
+        .channel-list {
+            width: 240px;
+            background-color: #2f3136;
+            padding: 12px 0;
+            overflow-y: auto;
+        }
+        .channel-category {
+            padding: 0 16px;
+            margin-top: 16px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: bold;
+            color: #72767d;
+        }
+        .channel {
+            padding: 6px 8px 6px 16px;
+            margin: 0 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            color: #72767d;
+            cursor: pointer;
+        }
+        .channel:hover {
+            background-color: rgba(79, 84, 92, 0.16);
+            color: #dcddde;
+        }
+        .channel.active {
+            background-color: rgba(79, 84, 92, 0.32);
+            color: #ffffff;
+        }
+        .channel-icon {
+            margin-right: 6px;
+        }
+        .main-content {
+            flex: 1;
+            background-color: #36393f;
+            display: flex;
+            flex-direction: column;
+        }
+        .channel-header {
+            height: 48px;
+            border-bottom: 1px solid #202225;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+        .message-list {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+        }
+        .article-card {
+            margin-bottom: 24px;
+            padding: 12px;
+            border-radius: 4px;
+            background-color: #2f3136;
+            transition: background-color 0.2s;
+        }
+        .article-card:hover {
+            background-color: #32353b;
+        }
+        .article-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .source-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #5865f2;
+            margin-right: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .source-info {
+            flex: 1;
+        }
+        .source-name {
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .timestamp {
+            font-size: 12px;
+            color: #72767d;
+        }
+        .article-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .article-content {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .article-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        .reactions {
+            display: flex;
+            gap: 8px;
+        }
+        .reaction {
+            padding: 4px 8px;
+            border-radius: 4px;
+            background-color: #36393f;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+        .reaction:hover {
+            background-color: #3c3f45;
+        }
+        .original-link {
+            color: #00b0f4;
+            text-decoration: none;
+        }
+        .original-link:hover {
+            text-decoration: underline;
+        }
+        .upload-area {
+            margin-top: 24px;
+            padding: 24px;
+            border: 2px dashed #72767d;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .upload-area:hover {
+            border-color: #5865f2;
+        }
+        .upload-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        .hash-entry {
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            background-color: #2f3136;
+            border-radius: 4px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        .hash-timestamp {
+            color: #72767d;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .quarantine-indicator {
+            display: inline-block;
+            padding: 2px 6px;
+            background-color: #faa61a;
+            color: #ffffff;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        @media (max-width: 768px) {
+            .server-list {
+                width: 48px;
+            }
+            .server-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 12px;
+            }
+            .channel-list {
+                width: 200px;
+            }
+        }
+        @media (max-width: 576px) {
+            .channel-list {
+                display: none;
+            }
+            .server-list {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Server List -->
+        <div class="server-list">
+            <div class="server-icon active">HP</div>
+            <div class="server-icon">A</div>
+            <div class="server-icon">B</div>
+            <div class="server-icon">C</div>
+        </div>
+
+        <!-- Channel List -->
+        <div class="channel-list">
+            <div class="channel-category">Channels</div>
+            <div class="channel active">
+                <span class="channel-icon">#</span>
+                breaking-news
+            </div>
+            <div class="channel">
+                <span class="channel-icon">#</span>
+                moderation-log
+            </div>
+            <div class="channel">
+                <span class="channel-icon">#</span>
+                quarantine
+            </div>
+            <div class="channel-category">Upload</div>
+            <div class="channel">
+                <span class="channel-icon">📤</span>
+                evidence-upload
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="channel-header">
+                # breaking-news
+            </div>
+            <div class="message-list">
+                <!-- Article Card 1 -->
+                <div class="article-card">
+                    <div class="article-header">
+                        <div class="source-icon">BBC</div>
+                        <div class="source-info">
+                            <div class="source-name">BBC Persian</div>
+                            <div class="timestamp">Today at 2:30 PM</div>
+                        </div>
+                    </div>
+                    <div class="article-title">تحولات سیاسی جدید در افغانستان</div>
+                    <div class="article-content">
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+                    </div>
+                    <div class="article-footer">
+                        <div class="reactions">
+                            <div class="reaction">👍 24</div>
+                            <div class="reaction">👎 3</div>
+                        </div>
+                        <a href="#" class="original-link">مشاهده مقاله اصلی</a>
+                    </div>
+                </div>
+
+                <!-- Article Card 2 -->
+                <div class="article-card">
+                    <div class="article-header">
+                        <div class="source-icon">AFP</div>
+                        <div class="source-info">
+                            <div class="source-name">AFP News</div>
+                            <div class="timestamp">Today at 1:15 PM</div>
+                        </div>
+                    </div>
+                    <div class="article-title">گزارش جدید از وضعیت اقتصادی افغانستان</div>
+                    <div class="article-content">
+                        کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
+                    </div>
+                    <div class="article-footer">
+                        <div class="reactions">
+                            <div class="reaction">👍 42</div>
+                            <div class="reaction">👎 7</div>
+                        </div>
+                        <a href="#" class="original-link">مشاهده مقاله اصلی</a>
+                    </div>
+                </div>
+
+                <!-- Upload Area -->
+                <div class="upload-area">
+                    <div class="upload-icon">📤</div>
+                    <div>برای آپلود مدارک و شواهد اینجا کلیک کنید یا فایل را بکشید و رها کنید</div>
+                    <div style="margin-top: 8px; color: #72767d;">پشتیبانی از فرمت‌های JPG، PNG، PDF (حداکثر 20MB)</div>
+                </div>
+
+                <!-- Moderation Log Example (Hidden by default) -->
+                <div style="display: none;">
+                    <div class="hash-entry">
+                        <div class="hash-timestamp">Today at 3:45 PM</div>
+                        <div>SHA-256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</div>
+                        <div>Reason: Matched regex pattern [طالبان]</div>
+                    </div>
+                    <div class="hash-entry">
+                        <div class="hash-timestamp">Today at 2:12 PM</div>
+                        <div>SHA-256: 7d793037a0760186574b0282f2f435e7</div>
+                        <div>Reason: Matched regex pattern [داعش]</div>
+                    </div>
+                </div>
+
+                <!-- Quarantine Example (Hidden by default) -->
+                <div style="display: none;">
+                    <div class="article-card">
+                        <div class="article-header">
+                            <div class="source-icon">NYT</div>
+                            <div class="source-info">
+                                <div class="source-name">New York Times</div>
+                                <div class="timestamp">Today at 11:30 AM</div>
+                            </div>
+                            <div class="quarantine-indicator">Quarantined</div>
+                        </div>
+                        <div class="article-title">گزارش تحلیلی از وضعیت امنیتی در شمال افغانستان</div>
+                        <div class="article-content">
+                            در این شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                        </div>
+                        <div class="article-footer">
+                            <div class="reactions">
+                                <div class="reaction">👍 8</div>
+                                <div class="reaction">👎 15</div>
+                            </div>
+                            <a href="#" class="original-link">مشاهده مقاله اصلی</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

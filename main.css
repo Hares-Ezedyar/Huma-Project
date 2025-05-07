@@ -1,0 +1,186 @@
+/* Basic CSS for HumaPress */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #36393f;
+  color: #dcddde;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.server-list {
+  width: 72px;
+  background-color: #202225;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.server-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #5865f2;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.server-icon.active {
+  border-radius: 16px;
+}
+
+.channel-list {
+  width: 240px;
+  background-color: #2f3136;
+  padding: 12px 0;
+  overflow-y: auto;
+}
+
+.channel-category {
+  padding: 0 16px;
+  margin-top: 16px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  color: #72767d;
+}
+
+.channel {
+  padding: 6px 8px 6px 16px;
+  margin: 0 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  color: #72767d;
+  cursor: pointer;
+}
+
+.channel.active {
+  background-color: rgba(79, 84, 92, 0.32);
+  color: #ffffff;
+}
+
+.main-content {
+  flex: 1;
+  background-color: #36393f;
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-header {
+  height: 48px;
+  border-bottom: 1px solid #202225;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.message-list {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.article-card {
+  margin-bottom: 24px;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #2f3136;
+}
+
+.article-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.source-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #5865f2;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.source-name {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #72767d;
+}
+
+.article-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.article-content {
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.article-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.reactions {
+  display: flex;
+  gap: 8px;
+}
+
+.reaction {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #36393f;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.original-link {
+  color: #00b0f4;
+  text-decoration: none;
+}
+
+.upload-area {
+  margin-top: 24px;
+  padding: 24px;
+  border: 2px dashed #72767d;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.quarantine-indicator {
+  display: inline-block;
+  padding: 2px 6px;
+  background-color: #faa61a;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-left: 8px;
+}
